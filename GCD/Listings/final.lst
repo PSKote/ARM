@@ -1,0 +1,68 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             appcode, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000                 ENTRY
+    4 00000000         __main  FUNCTION
+    5 00000000         ; GCD
+    6 00000000 F04F 0105       MOV              R1, #5      ; fisrt number
+    7 00000004 F04F 0202       MOV              R2, #2      ; second number
+    8 00000008 4291    while   CMP              R1, R2      ; while (a!=b)
+    9 0000000A BFCC 1A89       SUBGT            R1, R1, R2  ; if (a>b) then a=a
+                                                            -b
+   10 0000000E 1A52            SUBLE            R2, R2, R1  ; else b=b-a
+   11 00000010 D1FA            BNE              while
+   12 00000012 460C            MOV              R4, R1      ; move GCD to R4
+   13 00000014 E7FE    stop    B                stop        ; stop program
+   14 00000016                 ENDFUNC
+   15 00000016                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\final.d -o.\objects\final.o -IC:\Users\prajwal\Deskto
+p\ARM\GCD\RTE\_Target_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include -IC
+:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\Device\ARM\ARMCM4\Include --predefine="__EVA
+L SETA 1" --predefine="__UVISION_VERSION SETA 522" --predefine="_RTE_ SETA 1" -
+-predefine="ARMCM4_FP SETA 1" --list=.\listings\final.lst final.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file final.s
+   Uses
+      At line 2 in file final.s
+Comment: __main used once
+appcode 00000000
+
+Symbol: appcode
+   Definitions
+      At line 1 in file final.s
+   Uses
+      None
+Comment: appcode unused
+stop 00000014
+
+Symbol: stop
+   Definitions
+      At line 13 in file final.s
+   Uses
+      At line 13 in file final.s
+Comment: stop used once
+while 00000008
+
+Symbol: while
+   Definitions
+      At line 8 in file final.s
+   Uses
+      At line 11 in file final.s
+Comment: while used once
+4 symbols
+339 symbols in table
