@@ -1,0 +1,103 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             appcode, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000                 ENTRY
+    4 00000000         __main  FUNCTION
+    5 00000000         ; Largest of three numbers
+    6 00000000         ; largest number will be stored in R6
+    7 00000000 F04F 0208       MOV              R2, #8      ; first number
+    8 00000004 F04F 0302       MOV              R3, #2      ; second number
+    9 00000008 F04F 0409       MOV              R4, #9      ; third number
+   10 0000000C 429A            CMP              R2, R3      ; if (a>b) then go 
+                                                            to first
+   11 0000000E BFA8            IT               GE
+   12 00000010 E002            BGE              first
+   13 00000012 42A3            CMP              R3, R4      ; if (b>c) then go 
+                                                            to second
+   14 00000014 BFA8            IT               GE
+   15 00000016 E004            BGE              second
+   16 00000018 42A2    first   CMP              R2, R4      ; if (a>c) then a i
+                                                            s largest Else thir
+                                                            d
+   17 0000001A BFAC            ITE              GE
+   18 0000001C 4616            MOVGE            R6, R2      ; store 'a' as larg
+                                                            est
+   19 0000001E E002            BLT              third
+   20 00000020 E002            B                stop
+   21 00000022 461E    second  MOV              R6, R3      ; store 'b' as larg
+                                                            est 
+   22 00000024 E000            B                stop
+   23 00000026 4626    third   MOV              R6, R4      ; store 'c' as larg
+                                                            est
+   24 00000028 E7FE    stop    B                stop        ; stop program
+   25 0000002A                 ENDFUNC
+   26 0000002A                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\final.d -o.\objects\final.o -IC:\Users\prajwal\Deskto
+p\ARM\LargestOfThree\RTE\_Target_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\
+Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\Device\ARM\ARMCM4\Include --prede
+fine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 522" --predefine="_RTE
+_ SETA 1" --predefine="ARMCM4_FP SETA 1" --list=.\listings\final.lst final.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file final.s
+   Uses
+      At line 2 in file final.s
+Comment: __main used once
+appcode 00000000
+
+Symbol: appcode
+   Definitions
+      At line 1 in file final.s
+   Uses
+      None
+Comment: appcode unused
+first 00000018
+
+Symbol: first
+   Definitions
+      At line 16 in file final.s
+   Uses
+      At line 12 in file final.s
+Comment: first used once
+second 00000022
+
+Symbol: second
+   Definitions
+      At line 21 in file final.s
+   Uses
+      At line 15 in file final.s
+Comment: second used once
+stop 00000028
+
+Symbol: stop
+   Definitions
+      At line 24 in file final.s
+   Uses
+      At line 20 in file final.s
+      At line 22 in file final.s
+      At line 24 in file final.s
+
+third 00000026
+
+Symbol: third
+   Definitions
+      At line 23 in file final.s
+   Uses
+      At line 19 in file final.s
+Comment: third used once
+6 symbols
+341 symbols in table
