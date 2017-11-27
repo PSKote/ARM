@@ -1,0 +1,74 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             appcode, CODE, READONLY
+    2 00000000                 EXPORT           __main
+    3 00000000                 ENTRY
+    4 00000000         __main  FUNCTION
+    5 00000000 EEB7 1A00       VMOV.F32         S2, #1      ; Sum Variable
+    6 00000004 EEB2 3A04       VMOV.F32         S6, #10     ; 'n' variable - se
+                                                            quence size
+    7 00000008 EEF7 0A00       VMOV.F32         S1, #1      ; 'x' varaiable - i
+                                                            n e^x
+    8 0000000C EEF7 1A00       VMOV.F32         S3, #1      ; constant
+    9 00000010 EEB5 3A40 
+                       loop    VCMP.F32         S6, #0
+   10 00000014 EE81 2A03       VDIV.F32         S4, S2, S6  ; sum/i
+   11 00000018 EE60 2A82       VMUL.F32         S5, S1, S4  ; x*sum/i
+   12 0000001C EE31 1AA2       VADD.F32         S2, S3, S5  ; sum = 1 + (x * (s
+                                                            um/i)) 
+   13 00000020 EE33 3A61       VSUB.F32         S6, S6, S3
+   14 00000024 DCF4            BGT              loop
+   15 00000026         
+   16 00000026 E7FE    stop    B                stop        ; stop program
+   17 00000028                 ENDFUNC
+   18 00000028                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\final.d -o.\objects\final.o -IC:\Users\prajwal\Deskto
+p\ARM\eToPowerx\RTE\_Target_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Inclu
+de -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\Device\ARM\ARMCM4\Include --predefine=
+"__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 522" --predefine="_RTE_ SET
+A 1" --predefine="ARMCM4_FP SETA 1" --list=.\listings\final.lst final.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file final.s
+   Uses
+      At line 2 in file final.s
+Comment: __main used once
+appcode 00000000
+
+Symbol: appcode
+   Definitions
+      At line 1 in file final.s
+   Uses
+      None
+Comment: appcode unused
+loop 00000010
+
+Symbol: loop
+   Definitions
+      At line 9 in file final.s
+   Uses
+      At line 14 in file final.s
+Comment: loop used once
+stop 00000026
+
+Symbol: stop
+   Definitions
+      At line 16 in file final.s
+   Uses
+      At line 16 in file final.s
+Comment: stop used once
+4 symbols
+339 symbols in table
